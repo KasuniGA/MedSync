@@ -3,6 +3,8 @@ body {
 }
 input[type="text"],
 input[type="password"],
+input[type="email"],
+input[type="number"],
 select,
 input[type="date"] {
   border: 2px solid rgb(208, 161, 255);

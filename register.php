@@ -60,8 +60,7 @@ if (isset($_GET["ok"])) {
                     <label for="validationCustom04" class="form-label"><?=required_star() ?> Gender</label>
                     <select style="border: 2px solid rgb(208, 161, 255)" class="form-select form-select-sm"
                         id="validationCustom04" required name="gender">
-                        <option value="male" selected>Male</option>
-                        <option value="female">Female</option>
+                        <?=get_gender("")?>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -78,14 +77,7 @@ if (isset($_GET["ok"])) {
                     <label for="validationCustom04" class="form-label"><?=required_star() ?> Blood Group</label>
                     <select style="border: 2px solid rgb(208, 161, 255)" class="form-select form-select-sm"
                         id="validationCustom04" required name="b-grp">
-                        <option value="A+" selected>A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
+                        <?=get_blood_group("") ?>
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -105,7 +97,7 @@ if (isset($_GET["ok"])) {
                     <select style="border: 2px solid rgb(208, 161, 255)" class="form-select form-select-sm"
                         id="validationCustom04" required name="district">
                         <!-- add the districts -->
-                        <?=get_districts()?>
+                        <?=get_districts("")?>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -162,7 +154,7 @@ if (isset($_GET["ok"])) {
                     <select style="border: 2px solid rgb(208, 161, 255)" class="form-select form-select-sm"
                         id="validationCustom04" required name="emerg-district">
                         <!-- add the districts -->
-                        <?=get_districts()?>
+                        <?=get_districts("")?>
                     </select>
                 </div>
             </div>
@@ -209,9 +201,6 @@ if (isset($_GET["ok"])) {
     </div>
 </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-</script>
 
 <?php
 include_once "./site_parts/web_custom_footer.php";

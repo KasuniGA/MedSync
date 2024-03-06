@@ -3,30 +3,45 @@ function required_star() {
 return '<span style="color: red;">*</span>';
 }
 
-function get_districts() {
-    return '<option value="Colombo" selected>Colombo</option>
-    <option value="Gampaha">Gampaha</option>
-    <option value="Kaluthara">Kaluthara</option>
-    <option value="Kandy">Kandy</option>
-    <option value="Matale">Matale</option>
-    <option value="Nuwara Eliya">Nuwara Eliya</option>
-    <option value="Galle">Galle</option>
-    <option value="Matara">Matara</option>
-    <option value="Hambantota">Hambantota</option>
-    <option value="Jaffna">Jaffna</option>
-    <option value="Kilinochchi">Kilinochchi</option>
-    <option value="Mannar">Mannar</option>
-    <option value="Vavuniya">Vavuniya</option>
-    <option value="Mullaitivu">Mullaitivu</option>
-    <option value="Batticaloa">Batticaloa</option>
-    <option value="Ampara">Ampara</option>
-    <option value="Trincomalee">Trincomalee</option>
-    <option value="Kurunegala">Kurunegala</option>
-    <option value="Puttalam">Puttalam</option>
-    <option value="Anuradhapura">Anuradhapura</option>
-    <option value="Polonnaruwa">Polonnaruwa</option>
-    <option value="Badulla">Badulla</option>
-    <option value="Monaragala">Monaragala</option>
-    <option value="Ratnapura">Ratnapura</option>
-    <option value="Kegalle">Kegalle</option>';
+function get_districts($selected_district) {
+    $districts = ["Ampara","Anuradhapura","Badulla","Batticaloa","Colombo","Galle","Gampaha","Hambantota","Jaffna","Kalutara","Kandy","Kegalle","Kilinochchi","Kurunegala","Mannar","Matale","Matara","Monaragala","Mullaitivu","Nuwara Eliya","Polonnaruwa","Puttalam","Ratnapura","Trincomalee","Vavuniya"];
+    $text = "";
+    foreach ($districts as $district) {
+        if ($district == $selected_district) {
+            $text .= '<option value="' . $district . '"'. "selected" .'>'. $district . '</option>';
+        } 
+        else {
+            $text .= '<option value="' . $district . '"' .'>'. $district . '</option>';
+        }
+    }
+    
+    return $text;
+}
+function get_gender($selected_gender) {
+    $genders = ["Male", "Female"];
+    $text = "";
+    foreach ($genders as $gender) {
+        if ($gender == $selected_gender) {
+            $text .= '<option value="' . $gender . '"'. "selected" .'>'. $gender . '</option>';
+        } 
+        else {
+            $text .= '<option value="' . $gender . '"' .'>'. $gender . '</option>';
+        }
+    }
+    
+    return $text;
+}
+function get_blood_group($selected_blood) {
+    $groups = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+","O-"];
+    $text = "";
+    foreach ($groups as $group) {
+        if ($group == $selected_blood) {
+            $text .= '<option value="' . $group . '"'. "selected" .'>'. $group . '</option>';
+        } 
+        else {
+            $text .= '<option value="' . $group . '"' .'>'. $group . '</option>';
+        }
+    }
+    
+    return $text;
 }
