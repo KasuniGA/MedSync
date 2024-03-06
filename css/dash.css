@@ -1,3 +1,7 @@
+:root {
+  --input-color: rgb(147, 150, 255);
+}
+
 body {
   background-color: rgb(255, 255, 255);
 }
@@ -7,7 +11,7 @@ input[type="email"],
 input[type="number"],
 select,
 input[type="date"] {
-  border: 2px solid rgb(208, 161, 255);
+  border: 2px solid var(--input-color);
 }
 
 .c-nav {
