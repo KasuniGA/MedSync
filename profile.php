@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Profile";
 $web_title = "Profile";
 include_once "site_parts/dash_header.php";

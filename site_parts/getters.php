@@ -45,3 +45,43 @@ function get_blood_group($selected_blood) {
     
     return $text;
 }
+function add_alerts() {
+    
+    if (isset($_GET["err"])) {
+     ?>
+<div class="alert alert-danger alert-dismissible fade show inside-content mb-4" role="alert">
+    <p style="text-align: center; margin: 0;"><strong>Warning! &nbsp;</strong><?=$_GET["err"]?></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php
+        }
+ 
+       
+    if (isset($_GET["ok"])) {
+     ?>
+<div class="alert alert-success alert-dismissible fade show inside-content mb-4" role="alert">
+    <p style="text-align: center; margin: 0;"><strong>Looking Good! &nbsp;</strong><?=$_GET["ok"]?></p>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<?php
+}
+}
+
+function get_jambo($url, $topic, $description)
+{
+    ?>
+<section class="jambo-container-style"
+    style="position:relative; background: url('<?=$url; ?>'); background-position: center; background-repeat: no-repeat; background-size: cover; padding: 0;">
+    <div style="width:100%; height:100%; background-color: rgba(0, 0, 0, 0.4);">
+        <div class="text-white rounded" style="padding: 100px 50px">
+            <h1 style="color:white;">
+                <?=$topic; ?>
+            </h1>
+            <p>
+                <?=$description; ?>
+            </p>
+        </div>
+    </div>
+</section>
+<?php
+}

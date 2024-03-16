@@ -1,5 +1,6 @@
 <?php
 include_once "./site_parts/web_custom_header.php";
+include_once "site_parts/getters.php";
 ?>
 <div class="form_header navbar-spacing">
 
@@ -12,30 +13,10 @@ include_once "./site_parts/web_custom_header.php";
         </p>
     </div>
     <?php
-if (isset($_GET["err"])) {
-    ?>
-    <div class="alert alert-danger alert-dismissible fade show inside-content mb-4" role="alert">
-        <p style="text-align: center; margin: 0;"><strong>Warning! &nbsp;</strong><?=$_GET["err"]?></p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php
-    }
-    ?>
-    <?php
-if (isset($_GET["ok"])) {
-    ?>
-    <div class="alert alert-success alert-dismissible fade show inside-content mb-4" role="alert">
-        <p style="text-align: center; margin: 0;"><strong>Looking Good! &nbsp;</strong><?=$_GET["ok"]?></p>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    <?php
-    }
+    add_alerts();
     ?>
 </div>
 <section class="user_info">
-    <?php 
-        include_once "site_parts/getters.php";
-        ?>
     <div class="inside-content">
         <form validate method="post" action="./includes/user_register.inc.php">
             <h5 class="mb-2"><?=required_star()?> Personal Information</h5>

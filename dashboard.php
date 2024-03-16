@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Dashboard";
 $web_title = "Dashboard";
 include_once "site_parts/dash_header.php";

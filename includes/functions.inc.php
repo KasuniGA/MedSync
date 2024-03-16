@@ -62,6 +62,7 @@ function register_user($data) {
        
         
     $ref = $database->getReference('app/MedSync/users/' . $uid)->set($user_data);
+    $ref2 = $database->getReference('app/MedSync/nic/' . $nic)->set($uid);
      
 }
 }
@@ -94,6 +95,8 @@ function check_login($username, $password) {
     require "../db.php";
 
     $data = $database->getReference('app/MedSync/users/' . $username)->getValue();
+    $data_nic = $database->getReference('app/MedSync/nic/' . $username)->getValue();
+    
     if ($data) {
         if (($data["uid"] == $username) && ($data["password"] == $password)) {
             unset($array['password']);
@@ -106,6 +109,23 @@ function check_login($username, $password) {
             header("Location: ../login.php?err=Incorrect Username or Password");
             exit();
         }
+        
+    }
+    else if ($data_nic) {
+        $data = $database->getReference('app/MedSync/users/' . $data_nic)->getValue();
+        if (($data["uid"] == $data_nic) && ($data["password"] == $password)) {
+            print_r($data);
+            unset($array['password']);
+            session_start();
+            $_SESSION["user"] = $data;
+            header("Location: ../dashboard.php");
+            exit();
+        }
+        else {
+            header("Location: ../login.php?err=Incorrect Username or Password");
+            exit();
+        }
+
     }
     else {
         header("Location: ../login.php?err=Incorrect Username or Password");
