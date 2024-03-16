@@ -23,7 +23,7 @@ input[type="date"] {
 }
 
 .sidebar {
-  background-color: rgb(227, 207, 255) !important;
+  background-color: var(--dark) !important;
 }
 .menu-text {
   color: rgb(255, 255, 255);

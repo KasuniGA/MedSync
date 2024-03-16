@@ -34,16 +34,16 @@ if (isset($_POST["user_submission"]))
 
     for ($i = 0; $i < count($req_data); $i++) {
         if ($req_data[$i] == "") {
-            header("Location: ../user_register.php?err=Fill all required details");
+            header("Location: ../register.php?err=Fill all required details");
             exit();
         }
     }
     if ($password != $password_rep) {
-        header("Location: ../user_register.php?err=Password did not matched!");
+        header("Location: ../register.php?err=Password did not matched!");
         exit();
     }
 
     register_user($data);
-    header("Location: ../user_register.php?ok=User Registered Successfully");
+    header("Location: ../register.php?ok=User Registered Successfully");
 }
 ?>

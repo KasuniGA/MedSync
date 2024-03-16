@@ -9,7 +9,7 @@ require $newString;
 use Kreait\Firebase\Factory;
 $factory = (new Factory)
     -> withServiceAccount($json_path)
-    -> withDatabaseUri('https://remotes-bot-default-rtdb.asia-southeast1.firebasedatabase.app/');
+    -> withDatabaseUri('https://medsync-af55a-default-rtdb.asia-southeast1.firebasedatabase.app/');
 
 $database = $factory->createDatabase();
 

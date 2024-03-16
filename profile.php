@@ -172,7 +172,7 @@ include("db.php");
             <div class="from_div_content row g-3 needs-validation mt-4 mb-2">
                 <div class="col-12">
                     <button class="btn btn-primary form-control" type="submit" name="user_submission">
-                        Register
+                        Edit Details
                     </button>
                 </div>
             </div>

@@ -36,7 +36,7 @@ if (isset($_GET["err"])) {
         <form validate method="post" action="./includes/user_login.inc.php">
             <div class="from_div_content row g-3 needs-validation">
                 <div class="col-md-12">
-                    <label for="validationCustom01" class="form-label"><?=required_star()?> NIC / User ID</label>
+                    <label for="validationCustom01" class="form-label"><?=required_star()?> User ID</label>
                     <input type="text" class="form-control form-control-sm" id="validationCustom01" required
                         name="username" />
                 </div>
