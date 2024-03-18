@@ -43,7 +43,13 @@ if (isset($_POST["user_submission"]))
         exit();
     }
 
-    register_user($data);
-    header("Location: ../register.php?ok=User Registered Successfully");
+    
+    $key = register_user($data);
+    if ($key) {
+        header("Location: ../doctor_register.php?ok=User Registered Successfully. Your ID is: $key");
+    }
+    else {
+        header("Location: ../doctor_register.php?err=Something went wrong");
+    }
 }
 ?>

@@ -63,7 +63,62 @@ function register_user($data) {
         
     $ref = $database->getReference('app/MedSync/users/' . $uid)->set($user_data);
     $ref2 = $database->getReference('app/MedSync/nic/' . $nic)->set($uid);
+
+    return $uid;
      
+}
+else {
+    return false;
+}
+}
+function register_doctor($data) {
+    
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    // $data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $address_l1, $address_l2, $district,$phone, $email, $mbbs, $password, $password_rep];
+
+    if (count($data) == 14) {
+        $full_name = $data[0];
+        $first_name = $data[1];
+        $last_name = $data[2];
+        $gender = $data[3];
+        $dob = $data[4];
+        $nic = $data[5];
+        $address_l1 = $data[6];
+        $address_l2 = $data[7];
+        $district = $data[8];
+        $phone= $data[9];
+        $email = $data[10];
+        $mbbs = $data[11];
+        $password = $data[12];
+        $password_rep = $data[13];
+        $uid = get_doc_UID();
+
+        
+        // Create an associative array with the data
+        $user_data = array(
+            'full_name' => $full_name,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'gender' => $gender,
+            'dob' => $dob,
+            'nic' => $nic,
+            'mbbs' => $mbbs,
+            'address_l1' => $address_l1,
+            'address_l2' => $address_l2,
+            'district' => $district,
+            'phone' => $phone,
+            'email' => $email,
+            'uid' => $uid,
+            'password' => $password
+        );
+       
+        
+    $ref = $database->getReference('app/MedSync/doctors/' . $uid)->set($user_data);
+    return $uid;
+}
+else {
+    return false;
 }
 }
 
@@ -75,6 +130,19 @@ function generateUID() {
         $uid .= $characters[mt_rand(0, $max)];
     }
     return $uid;
+}
+function get_doc_UID() {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+
+    $uid = "DR" . generateUID();
+    $data = $database->getReference('app/MedSync/doctors/' . $uid . '/user_id' )->getValue();
+    if ($data) {
+        get_doc_UID();
+    }
+    else {
+        return $uid;
+    }
 }
 function get_UID() {
     $json_path = "../config/credentials.json";
@@ -90,6 +158,27 @@ function get_UID() {
     }
 }
 
+function check_doc_login($username, $password) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    
+    $data = $database->getReference('app/MedSync/doctors/' . $username)->getValue();
+    if ($data) {
+        if (($data["uid"] == $username) && ($data["password"] == $password)) {
+            unset($array['password']);
+            session_start();
+            $_SESSION["role"] = "doctor";
+            $_SESSION["doctor"] = $data;
+            header("Location: ../dashboard.php");
+            exit();
+        } 
+        else {
+            header("Location: ../login.php?err=Incorrect Username or Password");
+            exit();
+        }
+    }
+}
+
 function check_login($username, $password) {
     $json_path = "../config/credentials.json";
     require "../db.php";
@@ -101,6 +190,7 @@ function check_login($username, $password) {
         if (($data["uid"] == $username) && ($data["password"] == $password)) {
             unset($array['password']);
             session_start();
+            $_SESSION["role"] = "user";
             $_SESSION["user"] = $data;
             header("Location: ../dashboard.php");
             exit();
