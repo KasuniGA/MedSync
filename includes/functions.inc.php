@@ -207,6 +207,7 @@ function check_login($username, $password) {
             print_r($data);
             unset($array['password']);
             session_start();
+            $_SESSION["role"] = "user";
             $_SESSION["user"] = $data;
             header("Location: ../dashboard.php");
             exit();
