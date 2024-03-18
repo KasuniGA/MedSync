@@ -17,13 +17,28 @@ add_alerts();
 <?php 
 if ((isset($_SESSION["doctor"]) && $_SESSION['role'] == "doctor")) {
 ?>
-<h4 class="">Actions</h4>
+<div class="container d-flex justify-content-between align-items-center">
+    <h4 class="">Actions</h4>
+    <?php
+    if (isset($_SESSION["patient"])) {
+    ?>
+    <form method="post" action="./includes/search_patient.inc.php">
+        <button class="btn btn-danger" name="forget_patient" type="submit">Close Patient Session</button>
+    </form>
+    <?php
+    }
+    ?>
+</div>
 <div class="defalt-container-mod">
     <form validate method="post" action="./includes/search_patient.inc.php">
         <label class="form-label"><?=required_star()?> Patient ID</label>
         <div class="from_div_content row g-3 needs-validation align-items-center">
             <div class="col-md-6">
-                <input type="text" id="modalText2" class="form-control form-control-sm" required name="patient_id" />
+                <input type="text" id="modalText2" class="form-control form-control-sm" required name="patient_id" <?php
+                if (isset($_SESSION["patient"])) {
+                    echo 'value="' . $_SESSION["patient"]["uid"] . '"';
+                }
+                ?> />
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary form-control" type="submit" name="search_patient">
@@ -43,7 +58,7 @@ if ((isset($_SESSION["doctor"]) && $_SESSION['role'] == "doctor")) {
 <div class="conatiner defalt-container-mod">
 
     <?php 
-if (isset($_SESSION["patient"])) {
+if (!isset($_SESSION["patient"])) {
     ?>
     <div class="row">
         <div class="col-md-12">Please search the patient to get the details</div>
@@ -53,21 +68,65 @@ if (isset($_SESSION["patient"])) {
 else {
 ?>
     <div class="row">
-        <h5 class="mb-3">Basic Infomation</h5>
+        <h5 class="mb-4"><?=required_star()?> Patient Basic Infomation (<?=$_SESSION["patient"]["uid"] ?>)</h5>
         <div class="col-md-6">
-            <p>Patient Name: <b>Upeksha Indeewara</b></p>
+            <p>Patient Name: <b><?=$_SESSION["patient"]["first_name"] ?> <?=$_SESSION["patient"]["last_name"] ?></b></p>
         </div>
         <div class="col-md-6">
-            <p>Patient Age: <b>23 Years Old</b></p>
+            <p>Patient Full Name: <b><?=$_SESSION["patient"]["full_name"] ?></b></p>
         </div>
         <div class="col-md-6">
-            <p>Patient Name: </p>
+            <p>Patient NIC: <b><?=$_SESSION["patient"]["nic"] ?></b></p>
         </div>
         <div class="col-md-6">
-            <p>Patient Name: </p>
+            <p>Patient Age: <b><?=get_age($_SESSION["patient"]["dob"]) ?> Years Old</b></p>
         </div>
         <div class="col-md-6">
-            <p>Patient Name: </p>
+            <p>Patient Gender: <b><?=$_SESSION["patient"]["gender"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient DOB: <b><?=$_SESSION["patient"]["dob"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Blood Group: <span class="badge text-bg-primary"><?=$_SESSION["patient"]["blood"] ?></span> </p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Phone: <b><?=$_SESSION["patient"]["phone"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Email: <b><?=$_SESSION["patient"]["email"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Address: <b><?=$_SESSION["patient"]["address_l1"] ?>, <?=$_SESSION["patient"]["address_l2"] ?>,
+                    <?=$_SESSION["patient"]["district"] ?></b></p>
+        </div>
+        <hr class="my-4">
+
+        <h5 class="my-4"><?=required_star()?> Emergency Contact Information</h5>
+        <div class="col-md-6">
+            <p>Name of Emergency Contact: <b><?=$_SESSION["patient"]["first_name"] ?>
+                    <?=$_SESSION["patient"]["emg_name"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Relationship to Patient: <b><?=$_SESSION["patient"]["rel_name"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Emergency Contact Number: <b><?=$_SESSION["patient"]["emg_phone"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Emergency Contact Address: <b><?=$_SESSION["patient"]["emg_address_l1"] ?>,
+                    <?=$_SESSION["patient"]["emg_address_l2"] ?>, <?=$_SESSION["patient"]["emg_district"] ?></b></p>
+        </div>
+        <hr class="my-4">
+        <h5 class="my-4"><?=required_star()?> Medical Conditions</h5>
+        <div class="col-md-6">
+            <p>Allergies: <b><?=$_SESSION["patient"]["med_allergy"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Surgeries: <b><?=$_SESSION["patient"]["med_surgery"] ?></b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Chronic Conditions: <b><?=$_SESSION["patient"]["med_chronic"] ?></b></p>
         </div>
     </div>
 

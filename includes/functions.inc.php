@@ -31,7 +31,8 @@ function register_user($data) {
         $password = $data[21];
         $password_rep = $data[22];
         $uid = get_UID();
-
+        
+        
         
         // Create an associative array with the data
         $user_data = array(
@@ -221,5 +222,18 @@ function check_login($username, $password) {
     else {
         header("Location: ../login.php?err=Incorrect Username or Password");
         exit();
+    }
+}
+
+function search_user($patient_id) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+
+    $val = $database->getReference('app/MedSync/users/' . $patient_id)->getValue();
+    if ($val) {
+        $_SESSION["patient"] = $val;
+        return $val;
+    } else {
+        return false;
     }
 }

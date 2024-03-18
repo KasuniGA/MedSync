@@ -85,3 +85,12 @@ function get_jambo($url, $topic, $description)
 </section>
 <?php
 }
+
+function get_age($dob) {
+    $dobDate = new DateTime($dob);
+    $currentDate = new DateTime();
+    $ageInterval = $dobDate->diff($currentDate);
+    $age = $ageInterval->y;
+    
+    return $age;
+}
