@@ -36,9 +36,19 @@ input[type="date"] {
 .defalt-container-style {
   width: 100%;
   padding: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 2px solid rgb(153, 165, 255);
+}
+
+.defalt-container-mod {
+  margin: 15px 0;
+  padding: 10px;
   border-radius: 15px;
   overflow: hidden;
+  border: 2px solid rgb(230, 230, 230);
 }
+
 .t-text {
   font-size: 0.9rem;
 }

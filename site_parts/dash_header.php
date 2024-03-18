@@ -104,6 +104,7 @@
                                     Profile
                                 </a>
                             </li>
+
                             <li class="nav-item">
                                 <a class="mb-3 nav-link menu-text" href="./history.php">
                                     History

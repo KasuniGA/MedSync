@@ -8,15 +8,75 @@ include("db.php");
 ?>
 <?php
 require "site_parts/getters.php";
+add_alerts();
 // get_jambo("https://assets-global.website-files.com/5f4bb8e34bc82700bda2f385/60592b7ebe1b7639868b5190_learning-web-design-sites.jpg", "Welcome, ".$_SESSION["user"]["first_name"]." ". $_SESSION["user"]["last_name"] . "!", "This is the " .$_SESSION["role"]. " portal of the College Of Alexandriana");
 ?>
 
 <!-- STUDENT PART -->
 
-<h4 class="mb-4 mt-5">Registered Classes</h4>
-<div class="container">
+<?php 
+if ((isset($_SESSION["doctor"]) && $_SESSION['role'] == "doctor")) {
+?>
+<h4 class="">Actions</h4>
+<div class="defalt-container-mod">
+    <form validate method="post" action="./includes/search_patient.inc.php">
+        <label class="form-label"><?=required_star()?> Patient ID</label>
+        <div class="from_div_content row g-3 needs-validation align-items-center">
+            <div class="col-md-6">
+                <input type="text" id="modalText2" class="form-control form-control-sm" required name="patient_id" />
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary form-control" type="submit" name="search_patient">
+                    Search
+                </button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" class="btn btn-success form-control" data-bs-toggle="modal"
+                    data-bs-target="#scannerModal">
+                    Scan QR
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="conatiner defalt-container-mod">
+
+    <?php 
+if (isset($_SESSION["patient"])) {
+    ?>
+    <div class="row">
+        <div class="col-md-12">Please search the patient to get the details</div>
+    </div>
+    <?php
+}
+else {
+?>
+    <div class="row">
+        <h5 class="mb-3">Basic Infomation</h5>
+        <div class="col-md-6">
+            <p>Patient Name: <b>Upeksha Indeewara</b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Age: <b>23 Years Old</b></p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Name: </p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Name: </p>
+        </div>
+        <div class="col-md-6">
+            <p>Patient Name: </p>
+        </div>
+    </div>
+
+    <?php 
+    }
+    ?>
+</div>
+<!-- <div class="container">
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        <!-- Card 1 -->
         <div class="col">
             <div class="card card-animation">
                 <div class="card-body">
@@ -37,8 +97,67 @@ require "site_parts/getters.php";
             </div>
         </div>
     </div>
+</div> -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="scannerModal" tabindex="-1" aria-labelledby="scannerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="scannerModalLabel">QR Scanner</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="preview">
+                    <video id="modalPreview" width="100%"></video>
+                </div>
+                <input type="text" id="modalText" class="form-control mt-3" placeholder="Scan result">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
-<br>
+<?php
+}
+?>
+
+
+<!-- QR Scanner -->
+<script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+<script>
+let modalScanner = new Instascan.Scanner({
+    video: document.getElementById('modalPreview')
+});
+
+function startModalScanner() {
+    Instascan.Camera.getCameras().then(function(cameras) {
+        if (cameras.length > 0) {
+            modalScanner.start(cameras[0]);
+        } else {
+            alert("No Cameras found");
+        }
+    }).catch(function(e) {
+        console.error(e);
+    });
+}
+
+modalScanner.addListener('scan', function(content) {
+    document.getElementById('modalText').value = content;
+    document.getElementById('modalText2').value = content;
+});
+
+document.getElementById('scannerModal').addEventListener('shown.bs.modal', function() {
+    startModalScanner();
+});
+
+document.getElementById('scannerModal').addEventListener('hidden.bs.modal', function() {
+    modalScanner.stop();
+});
+</script>
+
 
 
 <?php
