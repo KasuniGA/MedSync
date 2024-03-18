@@ -45,6 +45,20 @@ function get_blood_group($selected_blood) {
     
     return $text;
 }
+function get_report_type($report_type) {
+    $groups = ["Surgery", "Prescription","Referral Letter", "Diagnosis","Treatment Plan", "Lab Test Result", "Imaging Test Result", "Therapy Session Notes", "Follow-up Instructions", "Medical Procedure", "Medical History", "Immunization Record"];
+    $text = "";
+    foreach ($groups as $group) {
+        if ($group == $report_type) {
+            $text .= '<option value="' . $group . '"'. "selected" .'>'. $group . '</option>';
+        } 
+        else {
+            $text .= '<option value="' . $group . '"' .'>'. $group . '</option>';
+        }
+    }
+    
+    return $text;
+}
 function add_alerts() {
     
     if (isset($_GET["err"])) {
@@ -93,4 +107,8 @@ function get_age($dob) {
     $age = $ageInterval->y;
     
     return $age;
+}
+
+function ts_to_date($timestamp) {
+    return date("Y-m-d H:i:s", $timestamp);
 }

@@ -4,9 +4,7 @@ $title = "Dashboard";
 $web_title = "Dashboard";
 include_once "site_parts/dash_header.php";
 $json_path = "config/credentials.json";
-include("db.php");
-?>
-<?php
+require "db.php";
 require "site_parts/getters.php";
 add_alerts();
 // get_jambo("https://assets-global.website-files.com/5f4bb8e34bc82700bda2f385/60592b7ebe1b7639868b5190_learning-web-design-sites.jpg", "Welcome, ".$_SESSION["user"]["first_name"]." ". $_SESSION["user"]["last_name"] . "!", "This is the " .$_SESSION["role"]. " portal of the College Of Alexandriana");

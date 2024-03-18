@@ -237,3 +237,57 @@ function search_user($patient_id) {
         return false;
     }
 }
+
+function generateRandomKey() {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $key = '';
+    $length = strlen($characters);
+
+    for ($i = 0; $i < 16; $i++) {
+        $key .= $characters[rand(0, $length - 1)];
+    }
+
+    return $key;
+}
+
+function add_main_section($key, $patient_id, $topic, $description, $doctor) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    
+    $main_report = array(
+        'record_id' => $key,
+        'topic' => $topic,
+        'description' => $description,
+        'ts' => time(),
+        'doctor' => $doctor,
+        'patient' => $patient_id,
+        'content' => array()
+    );
+    
+    
+    $ref = $database->getReference('app/MedSync/reports/' . $patient_id . '/' . $key)->set($main_report);
+}
+
+function get_reports($user) {
+    $json_path = "./config/credentials.json";
+    require "./db.php";
+    
+    $report_data = $database->getReference('app/MedSync/reports/' . $user)->getValue();
+    if ($report_data) {
+        return $report_data;
+    } else {
+        return false;
+    }
+}
+function get_all_docs() {
+    $json_path = "./config/credentials.json";
+    require "./db.php";
+    
+    $docs = $database->getReference('app/MedSync/doctors')->getValue();
+
+    if ($docs) {
+        return $docs;
+    } else {
+        return false;
+    }
+}
