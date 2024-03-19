@@ -104,12 +104,26 @@
                                     Profile
                                 </a>
                             </li>
-
+                            <?php
+                            if (isset($_SESSION["doctor"])) {
+                                ?>
                             <li class="nav-item">
                                 <a class="mb-3 nav-link menu-text" href="./history.php">
                                     History
                                 </a>
                             </li>
+                            <?php
+                            }
+                            if (isset($_SESSION["user"])) {
+                                ?>
+                            <li class="nav-item">
+                                <a class="mb-3 nav-link menu-text" href="./myhistory.php">
+                                    My History
+                                </a>
+                            </li>
+                            <?php
+                            }
+                            ?>
                             <li class="nav-item">
                                 <a class="mb-3 nav-link menu-text" href="./includes/logout.inc.php">
                                     Log Out
