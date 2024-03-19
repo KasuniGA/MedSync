@@ -79,7 +79,7 @@ add_alerts();
                     <?=$value["topic"] ?>
                 </button>
             </h2>
-            <div id="panel-<?=$key ?>" class="accordion-collapse collapse show">
+            <div id="panel-<?=$key ?>" class="accordion-collapse collapse">
                 <div class="accordion-body">
                     <div class="alert alert-success" role="alert">
                         <?=$value["description"] ?>
@@ -104,10 +104,15 @@ add_alerts();
                                 <input type="text" value="<?=generateRandomKey() ?>" hidden
                                     class="form-control form-control-sm" required name="sub_key" />
                                 <input type="text" value="<?=$key ?>" hidden class="form-control form-control-sm"
-                                    required name="key" />
+                                    required name="main_key" />
                             </div>
-                            <div class="d-flex justify-content-start">
-                                <button type="submit" name="new_sub_record" class="btn btn-primary mt-2 d-end">Add Sub
+                            <div class="model-wrapper mt-2">
+                                <label for="formFileSm" class="form-label"><?=required_star() ?> Upload Images</label>
+                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="images[]"
+                                    required multiple accept="image/jpeg, image/png" max="5">
+                            </div>
+                            <div class="d-flex justify-content-start mt-2">
+                                <button type="submit" name="new_sub_record" class="btn btn-primary d-end">Add Sub
                                     Record</button>
                             </div>
                         </form>

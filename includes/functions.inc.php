@@ -291,3 +291,21 @@ function get_all_docs() {
         return false;
     }
 }
+
+function  add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_description, $doctor, $image_list) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    
+    $sub_report = array(
+        'sub_record_id' => $sub_key,
+        'topic' => $sub_topic,
+        'description' => $sub_description,
+        'ts' => time(),
+        'doctor' => $doctor,
+        'patient' => $patient,
+        'imsges' => $image_list
+    );
+    
+    
+    $ref = $database->getReference("app/MedSync/reports/$patient/$main_key/content/$sub_key")->set($sub_report);
+}
