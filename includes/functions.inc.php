@@ -261,7 +261,8 @@ function add_main_section($key, $patient_id, $topic, $description, $doctor) {
         'ts' => time(),
         'doctor' => $doctor,
         'patient' => $patient_id,
-        'content' => array()
+        'content' => array(),
+        'status' => 'Active'
     );
     
     
@@ -292,7 +293,7 @@ function get_all_docs() {
     }
 }
 
-function  add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_description, $doctor, $image_list) {
+function  add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_description, $type, $doctor, $image_list) {
     $json_path = "../config/credentials.json";
     require "../db.php";
     
@@ -303,9 +304,17 @@ function  add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_descri
         'ts' => time(),
         'doctor' => $doctor,
         'patient' => $patient,
-        'imsges' => $image_list
+        'imsges' => $image_list,
+        'type' => $type
     );
     
     
     $ref = $database->getReference("app/MedSync/reports/$patient/$main_key/content/$sub_key")->set($sub_report);
+}
+
+function change_section_status($patient, $main_key, $status) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    
+    $ref = $database->getReference("app/MedSync/reports/$patient/$main_key/status")->set($status);
 }

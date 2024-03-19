@@ -19,11 +19,13 @@ else if (isset($_POST["new_sub_record"]) && $_SESSION["role"] == "doctor") {
     $sub_description = trim($_POST["sub_description"]);
     $sub_key = trim($_POST["sub_key"]);
     $main_key = trim($_POST["main_key"]);
+    $type = trim($_POST["type"]);
     $doctor = $_SESSION["doctor"]["uid"];
     $patient = $_SESSION["patient"]["uid"];
+
     $image_list = [];
 
-    if(isset($_FILES['images'])) {
+    if(isset($_FILES['images']) && count($image_list) > 0) {
 
     $uploadedFiles = $_FILES['images'];
     $uploadFolder = "../img/";
@@ -55,10 +57,37 @@ else if (isset($_POST["new_sub_record"]) && $_SESSION["role"] == "doctor") {
     
     }
 }
-    add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_description, $doctor, $image_list);
+    $data = [$sub_topic, $sub_description, $type];
+    for ($i = 0; $i < count($data); $i++) {
+        if ($data[$i] == "") {
+            header("Location: ../history.php?err=Fill all required details");
+            exit();
+        }
+    }
+
+    add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_description, $type, $doctor, $image_list);
     header("Location: ../history.php?ok=New sub section added");
     exit();
 }
+
+else if (isset($_POST["main_section_status"]) && $_SESSION["role"] == "doctor") {
+    $main_key = $_POST["main_key"];
+    $patient = $_POST["patient"];
+    $status = $_POST["status"];
+    
+    $data = [$main_key, $patient, $status];
+    for ($i = 0; $i < count($data); $i++) {
+        if ($data[$i] == "") {
+            header("Location: ../history.php?err=Reload your web page");
+            exit();
+        }
+    }
+    change_section_status($patient, $main_key, $status);
+    header("Location: ../history.php?ok=Report status changed");
+    exit();
+    
+}
+
 else {
     header("Location: ../dashboard.php");
 }

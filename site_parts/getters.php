@@ -46,7 +46,7 @@ function get_blood_group($selected_blood) {
     return $text;
 }
 function get_report_type($report_type) {
-    $groups = ["Surgery", "Prescription","Referral Letter", "Diagnosis","Treatment Plan", "Lab Test Result", "Imaging Test Result", "Therapy Session Notes", "Follow-up Instructions", "Medical Procedure", "Medical History", "Immunization Record"];
+    $groups = ["Prescription","Referral Letter", "Diagnosis","Treatment Plan", "Lab Test Result", "Surgery","Imaging Test Result", "Therapy Session Notes", "Follow-up Instructions", "Medical Procedure", "Medical History", "Immunization Record"];
     $text = "";
     foreach ($groups as $group) {
         if ($group == $report_type) {
