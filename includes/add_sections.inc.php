@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_POST["new_main_record"]) && $_SESSION["role"] == "doctor") {
     $topic = trim($_POST["topic"]);
-    $description = trim($_POST["description"]);
+    $description = $_POST["description"];
     $key = trim($_POST["key"]);
     
     add_main_section($key ,$_SESSION["patient"]["uid"], $topic, $description, $_SESSION["doctor"]["uid"]);
@@ -16,7 +16,7 @@ if (isset($_POST["new_main_record"]) && $_SESSION["role"] == "doctor") {
 else if (isset($_POST["new_sub_record"]) && $_SESSION["role"] == "doctor") {
     
     $sub_topic = trim($_POST["sub_topic"]);
-    $sub_description = trim($_POST["sub_description"]);
+    $sub_description = $_POST["sub_description"];
     $sub_key = trim($_POST["sub_key"]);
     $main_key = trim($_POST["main_key"]);
     $type = trim($_POST["type"]);
@@ -24,8 +24,10 @@ else if (isset($_POST["new_sub_record"]) && $_SESSION["role"] == "doctor") {
     $patient = $_SESSION["patient"]["uid"];
 
     $image_list = [];
+    // echo count($_FILES['images']['name']);
+    // echo $_FILES['images']['name'][0];
 
-    if(isset($_FILES['images']) && count($image_list) > 0) {
+    if(isset($_FILES['images']) && $_FILES['images']['name'][0]) {
 
     $uploadedFiles = $_FILES['images'];
     $uploadFolder = "../img/";

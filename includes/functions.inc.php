@@ -304,7 +304,7 @@ function  add_sub_section($patient, $main_key, $sub_key, $sub_topic, $sub_descri
         'ts' => time(),
         'doctor' => $doctor,
         'patient' => $patient,
-        'imsges' => $image_list,
+        'images' => $image_list,
         'type' => $type
     );
     

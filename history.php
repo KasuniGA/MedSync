@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!(isset($_SESSION["doctor"]) && $_SESSION["role"] == "doctor")) {
+    header("Location: ./index.php");
+}
 $title = "Patient History";
 $web_title = "Patient History";
 include_once "site_parts/dash_header.php";
@@ -9,11 +12,11 @@ require "site_parts/getters.php";
 require "includes/functions.inc.php";
 add_alerts();
 ?>
-<div class="container d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex justify-content-between align-items-center mb-4">
     <h4>Main sections</h4>
     <?php
     if (isset($_SESSION["patient"])) {
-    ?>
+        ?>
     <button class="btn btn-primary" data-bs-toggle="modal" type="button" data-bs-target="#new_record_model">New
         Main
         Record</button>
@@ -60,7 +63,7 @@ add_alerts();
     }
     ?>
 
-<section class="container">
+<section class="">
     <?php
     if (isset($_SESSION["patient"])) {
     ?>
@@ -147,8 +150,11 @@ add_alerts();
                             </div>
                             <div class="model-wrapper mt-2">
                                 <label class="form-label"><?=required_star() ?> Description</label>
-                                <input type="text" class="form-control form-control-sm" required
-                                    name="sub_description" />
+
+                                <textarea style="border: 2px solid var(--input-color);" class="form-control"
+                                    name="sub_description" placeholder="Write Here" id="floatingTextarea"
+                                    required></textarea>
+
                                 <input type="text" value="<?=generateRandomKey() ?>" hidden
                                     class="form-control form-control-sm" required name="sub_key" />
                                 <input type="text" value="<?=$key ?>" hidden class="form-control form-control-sm"
@@ -173,48 +179,62 @@ add_alerts();
                         </form>
                     </div>
                     <!-- scroll spy -->
+                    <?php 
+                    if (isset($value["content"])) {
+                    ?>
                     <hr class="my-4">
                     <h5 class="my-4">Sub Records</h5>
-                    <div class="accordion" id="accordionPanelsStayOpenExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                                    aria-controls="panelsStayOpen-collapseOne">
-                                    Accordion Item #1
-                                </button>
-                            </h2>
-                            <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                                <div class="accordion-body">
-                                    <strong>This is the first item's accordion body.</strong> It is shown by default,
-                                    until the collapse plugin adds the appropriate classes that we use to style each
-                                    element. These classes control the overall appearance, as well as the showing and
-                                    hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                                    our default variables. It's also worth noting that just about any HTML can go within
-                                    the <code>.accordion-body</code>, though the transition does limit overflow.
-                                </div>
-                            </div>
-                        </div>
+                    <div class="accordion" id="accordionPanels">
+                        <?php
+                    foreach ($value["content"] as $sub_key => $sub_value) {
+                        $sub_doctor = $docs[$sub_value["doctor"]]["first_name"] . ' ' . $docs[$sub_value["doctor"]]["last_name"];
+                        ?>
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-                                    aria-controls="panelsStayOpen-collapseTwo">
-                                    Accordion Item #2
+                                    style="display: flex; justify-content: space-between; width: 100%; align-items:center; position: relative;"
+                                    data-bs-target="#sub_panel_<?=$sub_key ?>" aria-expanded="false"
+                                    aria-controls="sub_panel_<?=$sub_key ?>">
+                                    <p class="m-0"><?=$sub_value["topic"] ?></p>
+                                    <p style="position: absolute; right: 60px;" class="m-0">
+                                        <?=ts_to_date($sub_value["ts"]) ?></p>
                                 </button>
                             </h2>
-                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+                            <div id="sub_panel_<?=$sub_key ?>" class="accordion-collapse collapse">
                                 <div class="accordion-body">
-                                    <strong>This is the second item's accordion body.</strong> It is hidden by default,
-                                    until the collapse plugin adds the appropriate classes that we use to style each
-                                    element. These classes control the overall appearance, as well as the showing and
-                                    hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-                                    our default variables. It's also worth noting that just about any HTML can go within
-                                    the <code>.accordion-body</code>, though the transition does limit overflow.
+                                    <div class="alert alert-primary" role="alert">
+                                        <p class="m-0">Created by <b>Dr. <?=$sub_doctor ?></b></p>
+                                        <p class="m-0"><span
+                                                class="badge text-bg-primary"><?=ts_to_date($sub_value["ts"]) ?></span>
+                                        </p>
+                                    </div>
+                                    <p>
+                                        <?=$sub_value["description"] ?>
+                                    </p>
+                                    <?php
+                                    if (isset($sub_value["images"])) {
+                                    ?>
+                                    <div class="image-container">
+                                        <?php 
+                            
+                                foreach ($sub_value["images"] as $image) {
+                                   ?>
+
+                                        <img src="./img/<?=$image ?>" class="img-fluid mx-2" alt="...">
+
+                                        <?php
+                            }
+                        }
+                            ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <?php } ?>
                     </div>
+                    <?php
+                    }
+                    ?>
                     <!-- scroll spy -->
 
                 </div>

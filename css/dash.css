@@ -10,9 +10,29 @@ input[type="password"],
 input[type="email"],
 input[type="number"],
 select,
+textarea,
 input[type="file"],
 input[type="date"] {
   border: 2px solid var(--input-color);
+}
+.image-container {
+  padding: 5px;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  border: 2px solid lightgray;
+  margin-top: 15px;
+  overflow: hidden;
+  overflow-x: auto;
+  scrollbar-width: thin; /* Width of the scrollbar */
+  scrollbar-color: #888 #f0f0f0; /* Color of the scrollbar thumb and track */
+}
+.image-container > img {
+  height: 150px;
+  width: auto;
+  border: 2px solid var(--dark);
 }
 
 .c-nav {
