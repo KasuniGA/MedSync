@@ -106,22 +106,15 @@ add_alerts();
                                     <p>
                                         <?=$sub_value["description"] ?>
                                     </p>
-                                    <?php
-                                    if (isset($sub_value["images"])) {
-                                    ?>
+                                    <?php if (isset($sub_value["images"])) { ?>
                                     <div class="image-container">
-                                        <?php 
-                            
-                                foreach ($sub_value["images"] as $image) {
-                                   ?>
+                                        <?php foreach ($sub_value["images"] as $image) { ?>
 
                                         <img src="./img/<?=$image ?>" class="img-fluid mx-2" alt="...">
 
-                                        <?php
-                            }
-                        }
-                            ?>
+                                        <?php }?>
                                     </div>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +163,7 @@ function printSection(sectionId) {
     printWindow.document.open();
     printWindow.document.write('<html><head><title>Print</title>');
     printWindow.document.write(css_files);
-    printWindow.document.write('</head><body class="container mx-3">');
+    printWindow.document.write('</head><body class="container" style="margin-left: auto; margin-right: auto;">');
     printWindow.document.write(content);
     printWindow.document.write('</body>');
     printWindow.document.write(`</html>`);
