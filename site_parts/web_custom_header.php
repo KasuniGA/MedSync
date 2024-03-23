@@ -58,6 +58,14 @@
     .nav-li-c {
         margin: 0 8px;
     }
+
+    .footer {
+        background-color: var(--dark);
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: auto;
+    }
     </style>
 
 </head>
@@ -81,13 +89,10 @@
                         <a href="index.php" class="nav-link text-color-main nav-texts">Home</a>
                     </li>
                     <li class="nav-item nav-li-c">
-                        <a href="#" class="nav-link text-color-main nav-texts">About Us</a>
+                        <a href="about_us.php" class="nav-link text-color-main nav-texts">About Us</a>
                     </li>
                     <li class="nav-item nav-li-c">
                         <a href="our_process.php" class="nav-link text-color-main nav-texts">Our Process</a>
-                    </li>
-                    <li class="nav-item nav-li-c">
-                        <a href="#" class="nav-link text-color-main nav-texts">Help & Support</a>
                     </li>
                     <li class="nav-item nav-li-c">
                         <a href="register.php" class="nav-link text-color-main nav-texts">Registrations</a>

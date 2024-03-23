@@ -122,10 +122,11 @@ body {
   flex-direction: column;
   justify-content: space-between;
   width: calc(50%);
-  border: 2px solid var(--primary);
+  border: 2px solid var(--third);
   height: 100%;
   padding: 25px;
   border-radius: 15px;
+  font-weight: 600;
 }
 .about-right {
   width: calc(50% - 50px);
@@ -135,6 +136,17 @@ body {
 }
 .about-right > img {
   width: 90%;
+}
+
+.about-left h2 {
+  color: var(--primary);
+  font-weight: 600;
+  /* text-decoration: underline; */
+}
+
+.title_info h1 {
+  color: var(--primary);
+  font-weight: 600;
 }
 
 @media screen and (max-width: 800px) {
@@ -274,5 +286,195 @@ body {
   .img-right,
   .img-left {
     width: 100%;
+  }
+}
+
+/* process page */
+
+.align-hero-process {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* border-radius: 15px; */
+  height: 90vh;
+  background: linear-gradient(135deg, #4eb2ff, #bcdcff);
+}
+
+.top-img-process {
+  width: calc(65vh);
+  z-index: 9;
+  position: absolute;
+  bottom: 0;
+}
+
+.top-circle-process {
+  position: absolute;
+  --circle-width: calc(70vh - 50px);
+  width: var(--circle-width);
+  height: var(--circle-width);
+  border-radius: 50%;
+  background-color: #4eb2ff;
+}
+
+@media screen and (max-width: 750px) {
+  .align-hero-process {
+    flex-direction: column;
+  }
+  .top-img-process {
+    width: 30%;
+  }
+  .top-circle-process {
+    --circle-width: calc(30vw);
+    width: var(--circle-width);
+    height: var(--circle-width);
+  }
+}
+
+.barlow-semibold-process {
+  font-family: "Barlow", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 3.4rem;
+}
+
+.about-left-process {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(50%);
+  border: 2px solid var(--third);
+  height: 100%;
+  padding: 25px;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+  .about-left-process {
+    width: 95%;
+  }
+}
+.about-left-process h2 {
+  color: var(--primary);
+  font-weight: 600;
+  /* text-decoration: underline; */
+}
+
+.title_info-process h1 {
+  /* color: orange; */
+  font-weight: 600;
+}
+
+.about-left-process .para {
+  text-align: left;
+  padding: 0 1em;
+}
+
+/*about_us page */
+
+.barlow-semibold-about {
+  font-family: "Barlow", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 3.3rem;
+}
+
+.barlow-medium-about {
+  font-family: "Barlow", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 1.6rem;
+}
+
+.top-img-about {
+  width: 60rem;
+  position: absolute;
+  bottom: 0;
+}
+
+@media screen and (max-width: 750px) {
+  .align-hero-about {
+    flex-direction: column;
+  }
+  .top-img-about {
+    width: 60%;
+  }
+}
+
+.about-left-aboutus h2 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.about-left-aboutus {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc(50%);
+  border: 2px solid var(--third);
+  height: 100%;
+  padding: 25px;
+  border-radius: 15px;
+  font-weight: 600;
+}
+
+@media screen and (max-width: 800px) {
+  .about-left-aboutus {
+    width: 95%;
+  }
+  .about-right-aboutus {
+    width: 90%;
+    margin-top: 15px;
+  }
+}
+
+.about-right-aboutus {
+  width: calc(50% - 50px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-right-aboutus > img {
+  width: 90%;
+}
+
+.title_info-aboutus h1 {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/*vision amd mission*/
+
+.service-contents-aboutus {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.service-box-aboutus {
+  flex: 1;
+  position: relative;
+  padding: 30px;
+  border: 2px solid var(--light);
+  border: 2px solid var(--primary);
+  margin: 10px;
+  height: auto;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+.service-box-aboutus:hover {
+  background-color: var(--primary);
+  color: white;
+}
+
+@media screen and (max-width: 750px) {
+  .service-box-aboutus {
+    /* height: 200px; */
+    margin-bottom: 40px;
+  }
+  .service-contents-aboutus {
+    flex-direction: column;
   }
 }

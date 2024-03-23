@@ -10,9 +10,9 @@ include_once "site_parts/web_custom_header.php";
             a caring and
             healthier
             future for you... "</p>
-        <button class="btn btn-primary" style="padding: 12px 30px;">
+        <a href="./register.php" class="btn btn-primary" style="padding: 12px 30px;">
             Register Now
-        </button>
+        </a>
     </div>
     <div class="top_right">
         <img src="./images/2.png" class="img-fluid top-img" alt="...">

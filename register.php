@@ -50,7 +50,7 @@ include_once "site_parts/getters.php";
                         name="dob" />
                 </div>
                 <div class="col-md-6">
-                    <label class="form-label"><?=required_star() ?> NIC</label>
+                    <label class="form-label">NIC</label>
                     <input type="text" class="form-control form-control-sm" id="validationCustom03" required
                         name="nic" />
                 </div>
