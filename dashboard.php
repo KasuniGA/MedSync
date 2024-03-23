@@ -16,7 +16,11 @@ if (!isset($_SESSION["role"])) {
 // get_jambo("https://assets-global.website-files.com/5f4bb8e34bc82700bda2f385/60592b7ebe1b7639868b5190_learning-web-design-sites.jpg", "Welcome, ".$_SESSION["user"]["first_name"]." ". $_SESSION["user"]["last_name"] . "!", "This is the " .$_SESSION["role"]. " portal of the College Of Alexandriana");
 ?>
 
-<!-- STUDENT PART -->
+<section class="mb-5">
+    <?php
+get_jambo("https://img.freepik.com/free-photo/stethoscope-copy-space_23-2147652347.jpg", "Welcome " . $_SESSION[$_SESSION["role"]]["first_name"] . " " . $_SESSION[$_SESSION["role"]]["last_name"], "We seamlessly connect you with providers through innovative technology, ensuring a caring and healthier future for you...");
+?>
+</section>
 
 <?php 
 if ((isset($_SESSION["doctor"]) && $_SESSION['role'] == "doctor")) {
@@ -167,9 +171,55 @@ else {
         </div>
     </div>
 </div>
+
+
 <?php
 }
 ?>
+
+
+<?php
+if ((isset($_SESSION["user"]) && $_SESSION['role'] == "user")) { 
+    ?>
+
+<?php
+    require "includes/functions.inc.php";
+    $main_report_count = 0;
+    $sub_report_count = 0;
+    $active = 0;
+    $stable = 0;
+    $inactive = 0;
+    
+    $report_data = get_reports($_SESSION["user"]["uid"]);
+    ?>
+<section>
+    <?php
+    if ($report_data) {
+        foreach ($report_data as $key => $value) {
+            $main_report_count += 1;
+            if ($value["status"] == "Stable") {
+                $stable += 1;
+            } 
+            else if ($value["status"] == "Active") {
+                $active += 1;   
+            } 
+            else if ($value["status"] == "Inactive") {
+                $inactive += 1;
+            }
+            if (isset($value["content"])) {
+                foreach ($value["content"] as $sub_key => $sub_value) {
+                    $sub_report_count += 1;
+                }
+            }      
+        }
+    }
+    else {
+        echo "No data exists";
+    }
+    ?>
+
+</section>
+<?php } ?>
 
 
 <!-- QR Scanner -->

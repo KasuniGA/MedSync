@@ -99,7 +99,7 @@ function get_jambo($url, $topic, $description)
 {
     ?>
 <section class="jambo-container-style"
-    style="position:relative; background: url('<?=$url; ?>'); background-position: center; background-repeat: no-repeat; background-size: cover; padding: 0;">
+    style="position:relative; background: url('<?=$url; ?>'); background-position: center; background-repeat: no-repeat; background-size: cover; padding: 0; border-radius: 20px; overflow: hidden;">
     <div style="width:100%; height:100%; background-color: rgba(0, 0, 0, 0.4);">
         <div class="text-white rounded" style="padding: 100px 50px">
             <h1 style="color:white;">
