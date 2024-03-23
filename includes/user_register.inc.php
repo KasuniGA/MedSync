@@ -29,8 +29,11 @@ if (isset($_POST["user_submission"]))
     $password = $_POST["password"];
     $password_rep = $_POST["password_rep"];
 
-    $data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $med_allergy, $med_surgery, $med_chronic, $password, $password_rep];
-    $req_data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $password, $password_rep];
+    $relationship = $_POST["relationship"];
+    $occupation = $_POST["occupation"];
+
+    $data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $med_allergy, $med_surgery, $med_chronic, $password, $password_rep, $relationship, $occupation];
+    $req_data = [$full_name, $first_name, $last_name, $gender, $dob, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $password, $password_rep, $relationship, $occupation];
 
     for ($i = 0; $i < count($req_data); $i++) {
         if ($req_data[$i] == "") {
@@ -42,14 +45,18 @@ if (isset($_POST["user_submission"]))
         header("Location: ../register.php?err=Password did not matched!");
         exit();
     }
-
+    
+    if ($nic && is_nic_in_db($nic)) {
+        header("Location: ../register.php?err=NIC already exsists! If you any help contact us");
+        exit();
+    }
     
     $key = register_user($data);
     if ($key) {
-        header("Location: ../doctor_register.php?ok=User Registered Successfully. Your ID is: $key");
+        header("Location: ../register.php?ok=User Registered Successfully. Your ID is: <b>$key</b>");
     }
     else {
-        header("Location: ../doctor_register.php?err=Something went wrong");
+        header("Location: ../register.php?err=Something went wrong");
     }
 }
 ?>

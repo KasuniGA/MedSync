@@ -36,7 +36,7 @@ if (isset($_POST["doc_submission"]))
 
     $key = register_doctor($data);
     if ($key) {
-        header("Location: ../doctor_register.php?ok=Doctor Registered Successfully. Your ID is: $key");
+        header("Location: ../doctor_register.php?ok=Doctor Registered Successfully. Your ID is: <b>$key</b>");
     }
     else {
         header("Location: ../doctor_register.php?err=Something went wrong");

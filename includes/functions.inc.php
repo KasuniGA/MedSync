@@ -6,7 +6,7 @@ function register_user($data) {
     $json_path = "../config/credentials.json";
     require "../db.php";
     
-    if (count($data) == 23) {
+    if (count($data) == 25) {
         $full_name = $data[0];
         $first_name = $data[1];
         $last_name = $data[2];
@@ -30,9 +30,16 @@ function register_user($data) {
         $med_chronic = $data[20];
         $password = $data[21];
         $password_rep = $data[22];
+
+        $relationship = $data[23];
+        $occupation = $data[24];
         $uid = get_UID();
         
-        
+        $is_nic = true;
+        if ($nic == "") {
+            $is_nic = false;
+            $nic = $uid;
+        }
         
         // Create an associative array with the data
         $user_data = array(
@@ -58,12 +65,16 @@ function register_user($data) {
             'med_surgery' => $med_surgery,
             'med_chronic' => $med_chronic,
             'uid' => $uid,
-            'password' => $password
+            'password' => $password,
+            'relationship' => $relationship,
+            'occupation' => $occupation
         );
        
         
     $ref = $database->getReference('app/MedSync/users/' . $uid)->set($user_data);
-    $ref2 = $database->getReference('app/MedSync/nic/' . $nic)->set($uid);
+    if ($is_nic) {
+        $ref2 = $database->getReference('app/MedSync/nic/' . $nic)->set($uid);
+    }
 
     return $uid;
      
@@ -180,10 +191,24 @@ function check_doc_login($username, $password) {
     }
 }
 
+function is_nic_in_db($nic) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    
+    $data_nic = $database->getReference('app/MedSync/nic/' . $nic)->getValue();
+    if ($data_nic) {
+        return $data_nic;
+    }
+    else {
+        return false;
+    }
+    
+}
+
 function check_login($username, $password) {
     $json_path = "../config/credentials.json";
     require "../db.php";
-
+    
     $data = $database->getReference('app/MedSync/users/' . $username)->getValue();
     $data_nic = $database->getReference('app/MedSync/nic/' . $username)->getValue();
     
@@ -236,6 +261,90 @@ function search_user($patient_id) {
     } else {
         return false;
     }
+}
+function get_user($patient_id) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+
+    $val = $database->getReference('app/MedSync/users/' . $patient_id)->getValue();
+    if ($val) {
+        return $val;
+    } else {
+        return false;
+    }
+}
+
+function edit_user($data) {
+    $json_path = "../config/credentials.json";
+    require "../db.php";
+    session_start();
+    // $data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $med_allergy, $med_surgery, $med_chronic, $relationship, $occupation, $uid];
+    if (count($data) == 24) {
+        $full_name = $data[0];
+        $first_name = $data[1];
+        $last_name = $data[2];
+        $gender = $data[3];
+        $dob = $data[4];
+        $nic = $data[5];
+        $blood = $data[6];
+        $address_l1 = $data[7];
+        $address_l2 = $data[8];
+        $district = $data[9];
+        $phone= $data[10];
+        $email = $data[11];
+        $emg_name = $data[12];
+        $rel_name = $data[13];
+        $emg_phone = $data[14];
+        $emg_address_l1 = $data[15];
+        $emg_address_l2 = $data[16];
+        $emg_district = $data[17];
+        $med_allergy = $data[18];
+        $med_surgery = $data[19];
+        $med_chronic = $data[20];
+ 
+        $relationship = $data[21];
+        $occupation = $data[22];
+        $uid = $data[23];
+ 
+        
+        // Create an associative array with the data
+        $user_data = array(
+            'full_name' => $full_name,
+            'first_name' => $first_name,
+            'last_name' => $last_name,
+            'gender' => $gender,
+            'dob' => $dob,
+            'nic' => $nic,
+            'blood' => $blood,
+            'address_l1' => $address_l1,
+            'address_l2' => $address_l2,
+            'district' => $district,
+            'phone' => $phone,
+            'email' => $email,
+            'emg_name' => $emg_name,
+            'rel_name' => $rel_name,
+            'emg_phone' => $emg_phone,
+            'emg_address_l1' => $emg_address_l1,
+            'emg_address_l2' => $emg_address_l2,
+            'emg_district' => $emg_district,
+            'med_allergy' => $med_allergy,
+            'med_surgery' => $med_surgery,
+            'med_chronic' => $med_chronic,
+            'uid' => $uid,
+            'relationship' => $relationship,
+            'occupation' => $occupation,
+            'password' => $_SESSION['user']['password']
+
+        );
+       
+        
+    $ref = $database->getReference('app/MedSync/users/' . $uid)->set($user_data);
+    return $uid;
+     
+}
+else {
+    return false;
+}
 }
 
 function generateRandomKey() {

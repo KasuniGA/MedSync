@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>User Register</title>
+    <title><?=$topic ?></title>
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/forms.css" />
     <link rel="stylesheet" href="./css/colors.css" />
     <link rel="stylesheet" href="./css/index.css" />
@@ -76,7 +77,7 @@
     <nav class="navbar navbar-expand-md navbar-dark"
         style="background-color: var(--primary) !important; position:fixed; z-index: 99; width: 100%; height: var(--nav-height); top:0;">
         <div class="container-fluid" style="background-color: var(--primary) !important;">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="./index.php">
                 <img src="./images/logo_.png" alt="Logo" style="width: 70px; height: 70px;" />
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"

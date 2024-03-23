@@ -1,4 +1,5 @@
 <?php
+$topic = "MedSync Login";
 include_once "./site_parts/web_custom_header.php";
 require "site_parts/getters.php";
 ?>

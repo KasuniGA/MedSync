@@ -1,7 +1,8 @@
   <!-- header -->
   <?php
-      include_once "site_parts/web_custom_header.php";
-      ?>
+$topic = "About Us";
+include_once "site_parts/web_custom_header.php";
+?>
 
   <section class="section-contents-main align-hero navbar-spacing">
       <div class="top_left">

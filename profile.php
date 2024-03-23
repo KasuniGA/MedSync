@@ -1,12 +1,23 @@
 <?php
 session_start();
+if (!isset($_SESSION["role"])) {
+    header("Location: ./index.php");
+}
 $title = "Profile";
 $web_title = "Profile";
 include_once "site_parts/dash_header.php";
 $json_path = "config/credentials.json";
 include("db.php");
+require "site_parts/getters.php";
+add_alerts();
+
 ?>
 
+<?php if (isset($_SESSION["doctor"])) { ?>
+<div class="alert alert-primary" role="alert">
+    If you need change your profile details please login with MedSync desktop application
+</div>
+<?php } ?>
 <section class="">
     <?php 
         include_once "site_parts/getters.php";
@@ -23,8 +34,10 @@ include("db.php");
                 </div>
                 <div class="col-md-6">
                     <label for="validationCustom01" class="form-label"><?=required_star()?> User ID</label>
-                    <input type="text" class="form-control form-control-sm" id="validationCustom01" required
-                        name="full-name" value="<?=$_SESSION[$_SESSION["role"]]['uid'] ?>" />
+                    <input type="text" class="form-control form-control-sm" id="validationCustom01" required disabled
+                        value="<?=$_SESSION[$_SESSION["role"]]['uid'] ?>" />
+                    <input type="text" class="form-control form-control-sm" id="validationCustom01" required name="uid"
+                        hidden value="<?=$_SESSION[$_SESSION["role"]]['uid'] ?>" />
                 </div>
                 <div class="col-md-6">
                     <label for="validationCustom01" class="form-label"><?=required_star() ?> First name</label>
@@ -50,8 +63,10 @@ include("db.php");
                 </div>
                 <div class="col-md-6">
                     <label for="validationCustom03" class="form-label"><?=required_star() ?> NIC</label>
-                    <input type="text" class="form-control form-control-sm" id="validationCustom03" required name="nic"
+                    <input type="text" class="form-control form-control-sm" id="validationCustom03" required disabled
                         value="<?=$_SESSION[$_SESSION["role"]]['nic'] ?>" />
+                    <input type="text" class="form-control form-control-sm" id="validationCustom03" required name="nic"
+                        hidden value="<?=$_SESSION[$_SESSION["role"]]['nic'] ?>" />
                 </div>
                 <?php 
                 if (isset($_SESSION["user"])) {
@@ -109,6 +124,21 @@ include("db.php");
                     <input type="email" class="form-control form-control-sm" id="validationCustom05" required
                         name="e-mail" value="<?=$_SESSION[$_SESSION["role"]]['email'] ?>" />
                 </div>
+                <?php if (isset($_SESSION["user"])) { ?>
+                <div class="col-md-6">
+                    <label for="validationCustom03" class="form-label"><?=required_star()?> Relationship Status</label>
+                    <select style="border: 2px solid rgb(208, 161, 255)" class="form-select form-select-sm"
+                        id="validationCustom04" required name="relationship">
+                        <?=get_relationship_status($_SESSION[$_SESSION["role"]]['relationship']) ?>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="validationCustom05" class="form-label"><?=required_star() ?> Occupation</label>
+                    <input type="text" class="form-control form-control-sm" id="validationCustom05" required
+                        name="occupation" value="<?=$_SESSION[$_SESSION["role"]]['occupation'] ?>" />
+                </div>
+                <?php } ?>
+
             </div>
             <?php 
             if (isset($_SESSION["user"])) {
@@ -179,7 +209,7 @@ include("db.php");
             <?php
             }
             ?>
-
+            <?php if (isset($_SESSION["user"])) { ?>
             <div class="from_div_content row g-3 needs-validation mt-4 mb-2">
                 <div class="col-12">
                     <button class="btn btn-primary form-control" type="submit" name="edit_user">
@@ -187,6 +217,12 @@ include("db.php");
                     </button>
                 </div>
             </div>
+            <?php } ?>
         </form>
     </div>
 </section>
+
+<?php
+// include_once "site-parts/footer_part.php";
+include_once "site_parts/dash_footer.php";
+?>

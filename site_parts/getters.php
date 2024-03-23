@@ -45,6 +45,20 @@ function get_blood_group($selected_blood) {
     
     return $text;
 }
+function get_relationship_status($selected_status) {
+    $groups = ["Single", "Married", "Partner", "Separated", "Unknown", "Widowed"];
+    $text = "";
+    foreach ($groups as $group) {
+        if ($group == $selected_status) {
+            $text .= '<option value="' . $group . '"'. "selected" .'>'. $group . '</option>';
+        } 
+        else {
+            $text .= '<option value="' . $group . '"' .'>'. $group . '</option>';
+        }
+    }
+    
+    return $text;
+}
 function get_report_type($report_type) {
     $groups = ["Prescription","Referral Letter", "Diagnosis","Treatment Plan", "Lab Test Result", "Surgery","Imaging Test Result", "Therapy Session Notes", "Follow-up Instructions", "Medical Procedure", "Medical History", "Immunization Record"];
     $text = "";

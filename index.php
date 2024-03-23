@@ -1,4 +1,5 @@
 <?php 
+$topic = "Home";
 include_once "site_parts/web_custom_header.php";
 ?>
 <section class="section-contents-main align-hero navbar-spacing">

@@ -1,6 +1,8 @@
 <?php
+$topic = "Doctor Registration";
 include_once "./site_parts/web_custom_header.php";
 include_once "site_parts/getters.php";
+
 ?>
 <div class="form_header navbar-spacing">
 
