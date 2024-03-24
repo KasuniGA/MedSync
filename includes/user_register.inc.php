@@ -53,7 +53,7 @@ if (isset($_POST["user_submission"]))
     
     $key = register_user($data);
     if ($key) {
-        header("Location: ../register.php?ok=User Registered Successfully. Your ID is: <b>$key</b>");
+        header("Location: ../register.php?ok=User Registered Successfully. Your ID is: <b>$key</b><br>Make Sure you saved your id befor closing this tab. Your User ID is needed for the Login.");
     }
     else {
         header("Location: ../register.php?err=Something went wrong");

@@ -18,6 +18,16 @@ if (!isset($_SESSION["role"])) {
 
 <section class="mb-5">
     <?php
+    if (isset($_SESSION["user"])) {
+        ?>
+    <div class="alert alert-primary mb-4 inside-content" role="alert">
+        <p class="mb-2"><b>Instructions</b></p>
+        <p class="m-0">You can now obtain your User ID card from any hospital. Simply visit your nearest hospital and
+            request the MedSync User ID card. They will provide you with the ID card, and a digital copy will also be
+            sent to the email address you provided. Remember, you can only change your email on the Profile page.</p>
+    </div>
+    <?php
+    }
 get_jambo("https://img.freepik.com/free-photo/stethoscope-copy-space_23-2147652347.jpg", "Welcome " . $_SESSION[$_SESSION["role"]]["first_name"] . " " . $_SESSION[$_SESSION["role"]]["last_name"], "We seamlessly connect you with providers through innovative technology, ensuring a caring and healthier future for you...");
 ?>
 </section>
