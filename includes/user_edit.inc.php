@@ -39,7 +39,6 @@ $med_chronic = $_POST["med-chronic"];
 $relationship = $_POST["relationship"];
 $occupation = $_POST["occupation"];
 
-print_r($_POST);
 $data = [$full_name, $first_name, $last_name, $gender, $dob, $nic, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $med_allergy, $med_surgery, $med_chronic, $relationship, $occupation, $uid];
 $req_data = [$full_name, $first_name, $last_name, $gender, $dob, $blood, $address_l1, $address_l2, $district,$phone, $email, $emg_name, $rel_name, $emg_phone , $emg_address_l1, $emg_address_l2, $emg_district, $relationship, $occupation];
 

@@ -140,9 +140,7 @@ add_alerts();
     </div>
 </section>
 
-<?php
-$js_files = `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>`;
-?>
+
 <script>
 function printSection(sectionId) {
     var accordionButtons = document.querySelectorAll('.sub-accordion-button');
@@ -164,10 +162,10 @@ function printSection(sectionId) {
     printWindow.document.open();
     printWindow.document.write('<html><head><title>Print</title>');
     printWindow.document.write(css_files);
-    printWindow.document.write('</head><body class="container" style="margin-left: auto; margin-right: auto;">');
+    printWindow.document.write('</head><section class="container" style="margin-left: auto; margin-right: auto;">');
     printWindow.document.write(content);
-    printWindow.document.write('</body>');
-    printWindow.document.write(`</html>`);
+    printWindow.document.write('</section>');
+    printWindow.document.write('</html>');
     printWindow.document.close();
     printWindow.print();
 }

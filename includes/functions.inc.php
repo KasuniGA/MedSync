@@ -177,7 +177,7 @@ function check_doc_login($username, $password) {
     $data = $database->getReference('app/MedSync/doctors/' . $username)->getValue();
     if ($data) {
         if (($data["uid"] == $username) && ($data["password"] == $password)) {
-            unset($array['password']);
+            unset($data['password']);
             session_start();
             $_SESSION["role"] = "doctor";
             $_SESSION["doctor"] = $data;
@@ -214,7 +214,7 @@ function check_login($username, $password) {
     
     if ($data) {
         if (($data["uid"] == $username) && ($data["password"] == $password)) {
-            unset($array['password']);
+            unset($data['password']);
             session_start();
             $_SESSION["role"] = "user";
             $_SESSION["user"] = $data;
@@ -231,7 +231,6 @@ function check_login($username, $password) {
         $data = $database->getReference('app/MedSync/users/' . $data_nic)->getValue();
         if (($data["uid"] == $data_nic) && ($data["password"] == $password)) {
             print_r($data);
-            unset($array['password']);
             session_start();
             $_SESSION["role"] = "user";
             $_SESSION["user"] = $data;
