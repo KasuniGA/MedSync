@@ -94,3 +94,65 @@ input[type="date"] {
 .card-animation:hover {
   box-shadow: 0 0 20px rgba(60, 0, 98, 0.5);
 }
+
+.progress {
+  min-width: 150px;
+  min-height: 150px;
+  background-color: #f3f3f3;
+  border-radius: 50%;
+  position: relative;
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.progress::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: conic-gradient(
+    var(--primary) var(--percentage),
+    transparent var(--percentage)
+  );
+  border-radius: 50%;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transform: rotate(calc(90deg + (360deg * var(--percentage))));
+}
+.pro-active::after {
+  background-image: conic-gradient(
+    var(--bs-success) var(--percentage),
+    transparent var(--percentage)
+  );
+}
+.pro-inactive::after {
+  background-image: conic-gradient(
+    var(--bs-danger) var(--percentage),
+    transparent var(--percentage)
+  );
+}
+.pro-stable::after {
+  background-image: conic-gradient(
+    var(--bs-warning) var(--percentage),
+    transparent var(--percentage)
+  );
+}
+
+.progress-text {
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  height: 100px;
+  width: 100px;
+  background-color: white;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -9,10 +9,7 @@ include_once "site_parts/getters.php";
     <h2 class="text-center mt-3">Doctor Registration Forum</h2>
     <div class="alert alert-primary mb-4 mt-3 inside-content" role="alert">
         <b>Instructions</b>
-        <p class="m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique voluptatibus perspiciatis
-            consequuntur
-            beatae quis ratione aliquam praesentium dolore tempore? Cumque mollitia voluptates aliquid quidem fugit?
-        </p>
+        <p class="m-0">You can register as a doctor in here</p>
     </div>
     <?php
     add_alerts();

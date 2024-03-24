@@ -1,6 +1,5 @@
 <footer class="footer mt-4">
-    <p class="mb-2">Developed by group CN</p>
-    <p class="mb-0">&copy; 2024 Group CN</p>
+    <p class="mb-2">Developed by group 23</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"

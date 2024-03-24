@@ -136,7 +136,7 @@
                         <!-- <img src="./imgs/logo_.png" class="img-fluid" alt="..."> -->
                     </div>
                     <div class="position-sticky" style="text-align: center;">
-                        <p class="text-white" style="font-size: small;">Developed by Group CN</p>
+                        <p class="text-white" style="font-size: small;">Developed by Group 23</p>
                     </div>
                 </div>
             </nav>

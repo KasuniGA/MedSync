@@ -189,7 +189,7 @@ if ((isset($_SESSION["user"]) && $_SESSION['role'] == "user")) {
     $active = 0;
     $stable = 0;
     $inactive = 0;
-    
+    $surgery_count = 0;
     $report_data = get_reports($_SESSION["user"]["uid"]);
     ?>
 <section>
@@ -209,14 +209,64 @@ if ((isset($_SESSION["user"]) && $_SESSION['role'] == "user")) {
             if (isset($value["content"])) {
                 foreach ($value["content"] as $sub_key => $sub_value) {
                     $sub_report_count += 1;
+                    
+                    if ($sub_value["type"] == "Surgery") {
+                        $surgery_count += 1;
+                    }
                 }
-            }      
+            }
         }
-    }
+    
+    ?>
+    <?php
+    $active_progress = $active / $main_report_count * 100;
+    $stable_progress = $stable / $main_report_count * 100;
+    $inactive_progress = $inactive / $main_report_count * 100;
+      ?>
+    <h4 class="mt-4 mb-3">Status Report</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-2 ">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-evenly align-items-center">
+                        <div class="progress pro-active" style="--percentage: <?=$active_progress?>%;">
+                            <span class="progress-text"><?=$active_progress?>% </span>
+                        </div>
+                        <p><b>Active</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-evenly align-items-center">
+                        <div class="progress pro-stable" style="--percentage: <?=$stable_progress?>%;">
+                            <span class="progress-text"><?=$stable_progress?>% </span>
+                        </div>
+                        <p><b>Stable</b></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-2">
+                <div class="card">
+                    <div class="card-body d-flex justify-content-evenly align-items-center">
+                        <div class="progress pro-inactive" style="--percentage: <?=$inactive_progress?>%;">
+                            <span class="progress-text"><?=$inactive_progress?>% </span>
+                        </div>
+                        <p><b>Inactive</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <p>Total Main Reports: <b><?=$main_report_count ?></b></p>
+        <p>Total Sub Reports: <b><?=$sub_report_count ?></b></p>
+        <p>Total Surgeries: <b><?=$surgery_count ?></b></p>
+    </div>
+    <?php }
     else {
         echo "No data exists";
-    }
-    ?>
+    } ?>
 
 </section>
 <?php } ?>
@@ -254,6 +304,7 @@ document.getElementById('scannerModal').addEventListener('hidden.bs.modal', func
     modalScanner.stop();
 });
 </script>
+
 
 
 

@@ -200,7 +200,8 @@ add_alerts();
                                 <div class="accordion-body">
                                     <div class="alert alert-primary" role="alert">
                                         <p class="m-0">Created by <b>Dr. <?=$sub_doctor ?></b></p>
-                                        <p class="m-0"><span
+                                        <p class="m-0">Type: <b><?=$sub_value["type"] ?></b></p>
+                                        <p class="mt-1"><span
                                                 class="badge text-bg-primary"><?=ts_to_date($sub_value["ts"]) ?></span>
                                         </p>
                                     </div>
